@@ -10,13 +10,13 @@ export default class ProductController{
 
     addProduct(req,res){
       console.log(req.body);
-       const {name,price,sizes} = req.body;
+       const {name,desc,price,sizes,categories} = req.body;
        const newProduct  = {
          name,
-         desc: req.body.desc,
+         desc,
          price: parseFloat(price),
          imageUrl: req.file.filename,
-         category: req.body.category,
+         categories,
          sizes:sizes.split(','),
        };
        const createdRecord = ProductModel.add(newProduct);
@@ -26,7 +26,7 @@ export default class ProductController{
     rateProduct(req,res,next){
       try{
          const userID = req.query.userID;
-         const productID = req.querys.productID;
+         const productID = req.query.productID;
          const rating = req.query.rating;
          ProductModel.rateProduct(userID,productID,rating);
          return res.status(200).send('Rating has been added successfully');
