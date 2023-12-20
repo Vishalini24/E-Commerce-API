@@ -10,13 +10,13 @@ export default class ProductController{
 
     addProduct(req,res){
       console.log(req.body);
-       const {name,desc,price,sizes,categories} = req.body;
+       const {name,desc,price,sizes,category} = req.body;
        const newProduct  = {
          name,
          desc,
          price: parseFloat(price),
          imageUrl: req.file.filename,
-         categories,
+         category,
          sizes:sizes.split(','),
        };
        const createdRecord = ProductModel.add(newProduct);
